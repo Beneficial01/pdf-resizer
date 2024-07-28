@@ -10,7 +10,7 @@ This Python script resizes PDF pages to a specified format. It uses PyPDF2 and R
 
 1. Clone the repository:
 ```
-git clone https://github.com/YourUsername/pdf-resizer.git
+git clone https://github.com/Beneficial01/pdf-resizer.git
 ```
 
 2. Install the required libraries:
