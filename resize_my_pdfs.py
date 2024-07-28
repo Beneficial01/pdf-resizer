@@ -3,8 +3,8 @@ from reportlab.lib.pagesizes import *
 from pdf_resizer import resize_pdf
 
 # Directory containing the PDFs
-input_dir = '/home/beneficial01/Nextcloud/KUL/Bachelor/ACSP/slides/'
-output_dir = '/home/beneficial01/Nextcloud/KUL/Bachelor/ACSP/slides/resized/'
+input_dir = '/path/to/input/directory'
+output_dir = '/path/to/output/directory'
 
 # Create the output directory if it doesn't exist
 os.makedirs(output_dir, exist_ok=True)

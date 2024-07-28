@@ -1,67 +1,67 @@
 # PDF Resizer
 
-This Python script resizes PDF pages to a specified format. It uses PyPDF2 and ReportLab libraries.
+This Python script allows you to resize PDF files to a specified page size and orientation. It can be used to resize all PDF files in a directory and save the resized versions in a specified output directory.
 
 ## Features
 
-- Resize PDF pages to any format (e.g., A5, A4) with ease.
+- Resize PDF pages to a specified size (e.g., A4, A5) and orientation (portrait or landscape).
+- Batch process all PDFs in a directory.
+- Easy to use with minimal setup.
 
 ## Installation
 
-1. Clone the repository:
-```
-git clone https://github.com/Beneficial01/pdf-resizer.git
-```
+Make sure you have Python and the required libraries installed:
 
-2. Install the required libraries:
-```
+```bash
 pip install PyPDF2 reportlab
 ```
 
 ## Usage
 
-To resize a PDF to A5 horizontal format, use the following code:
+### Example Script
+
+Create a `resize_pdfs.py` file with the following content to batch process all PDFs in a directory:
 
 ```python
-from PyPDF2 import PdfReader, PdfWriter
-from reportlab.lib.pagesizes import A5, landscape
+import os
+from pdf_resizer import resize_pdf
+from reportlab.lib.pagesizes import A4, A5, landscape, portrait
 
-def resize_pdf(input_pdf, output_pdf, target_size):
-    reader = PdfReader(input_pdf)
-    writer = PdfWriter()
-    
-    new_width, new_height = target_size
+# Define the input and output directories
+input_dir = '/path/to/input/directory'
+output_dir = '/path/to/output/directory'
 
-    for page_num in range(len(reader.pages)):
-        page = reader.pages[page_num]
-        
-        page.scale_to(new_width, new_height)
-        
-        writer.add_page(page)
-    
-    with open(output_pdf, 'wb') as output_file:
-        writer.write(output_file)
+# Create the output directory if it doesn't exist
+os.makedirs(output_dir, exist_ok=True)
 
-if __name__ == '__main__':
-    input_pdf_path = 'input.pdf'
-    output_pdf_path = 'output.pdf'
-    resize_pdf(input_pdf_path, output_pdf_path, landscape(A5))
+# Get a list of all PDF files in the input directory
+pdf_files = [f for f in os.listdir(input_dir) if f.lower().endswith('.pdf')]
+
+# Resize each PDF and save the result in the output directory
+for pdf_file in pdf_files:
+    input_pdf_path = os.path.join(input_dir, pdf_file)
+    output_pdf_path = os.path.join(output_dir, pdf_file)
+    resize_pdf(input_pdf_path, output_pdf_path, A5, landscape)
+
+print("All PDFs have been resized and saved in the output directory.")
 ```
 
-To resize to a different format, simply change `landscape(A5)` to the desired format (e.g., `landscape(A4)` or `A4`).
+### Running the Script
 
-## Running Tests
+To resize all PDFs in the specified input directory to A5 landscape, simply run:
 
-Run the test script using:
-
-```
-python test_pdf_resizer.py
+```bash
+python resize_pdfs.py
 ```
 
-## Contributing
+### Customizing the Resizing
 
-Feel free to open issues or submit pull requests for improvements or bug fixes.
+You can customize the target size and orientation by modifying the parameters passed to the `resize_pdf` function in `resize_pdfs.py`. For example, to resize to A4 portrait:
+
+```python
+resize_pdf(input_pdf_path, output_pdf_path, A4, portrait)
+```
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
