@@ -18,45 +18,37 @@ pip install PyPDF2 reportlab
 
 ## Usage
 
-### Example Script
+### Cloning the Repository
 
-Create a `resize_pdfs.py` file with the following content to batch process all PDFs in a directory:
+First, clone the repository and change to the repository directory:
 
-```python
-import os
-from pdf_resizer import resize_pdf
-from reportlab.lib.pagesizes import A4, A5, landscape, portrait
-
-# Define the input and output directories
-input_dir = '/path/to/input/directory'
-output_dir = '/path/to/output/directory'
-
-# Create the output directory if it doesn't exist
-os.makedirs(output_dir, exist_ok=True)
-
-# Get a list of all PDF files in the input directory
-pdf_files = [f for f in os.listdir(input_dir) if f.lower().endswith('.pdf')]
-
-# Resize each PDF and save the result in the output directory
-for pdf_file in pdf_files:
-    input_pdf_path = os.path.join(input_dir, pdf_file)
-    output_pdf_path = os.path.join(output_dir, pdf_file)
-    resize_pdf(input_pdf_path, output_pdf_path, A5, landscape)
-
-print("All PDFs have been resized and saved in the output directory.")
+```bash
+git clone https://github.com/Beneficial01/pdf-resizer.git
+cd pdf-resizer
 ```
 
 ### Running the Script
 
-To resize all PDFs in the specified input directory to A5 landscape, simply run:
+You can use the provided script `resize_pdfs.py` to resize all PDFs in a directory. The script will take care of resizing and saving the PDFs in a specified output directory. 
 
+1. Open the `resize_pdfs.py` file.
+2. Modify the `input_dir` and `output_dir` variables to specify the directories containing your PDFs and where you want to save the resized PDFs.
+
+For example:
+```python
+# Directory containing the PDFs
+input_dir = '/path/to/input/directory'
+output_dir = '/path/to/output/directory'
+```
+
+3. Run the script:
 ```bash
 python resize_pdfs.py
 ```
 
 ### Customizing the Resizing
 
-You can customize the target size and orientation by modifying the parameters passed to the `resize_pdf` function in `resize_pdfs.py`. For example, to resize to A4 portrait:
+You can customize the target size and orientation by modifying the parameters passed to the `resize_pdf` function in `resize_pdfs.py`. For example, to resize to A4 portrait, update the `resize_pdf` function call as follows:
 
 ```python
 resize_pdf(input_pdf_path, output_pdf_path, A4, portrait)
